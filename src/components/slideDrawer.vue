@@ -8,17 +8,22 @@
     <button @click="showDrawer">弹出抽屉</button>
     <transition name="drawer-wrapper">
       <div class="drawer-container" v-show="isShow">
+        <div class="button-container" @click="isShow=false">
+          <span class="button"></span>
+        </div>
         <div class="drawer">
           <ul class="item-container">
             <li
               class="item"
               v-for="(item,index) in pdata"
               :key="index"
-              @click="toggleImage(index)"
+              @click="clickEvent(index)"
             >
-              <img class="img" v-show="item.select" :src=getImg(item.setImg)>
-              <img class="img" v-show="!item.select" :src=getImg(item.unsetImg)>
-              <span class="text">{{item.name}}</span>
+              <div class="inside-box">
+                <img class="img" v-show="item.select" :src=getImg(item.setImg)>
+                <img class="img" v-show="!item.select" :src=getImg(item.unsetImg)>
+                <span class="text">{{item.text}}</span>
+              </div>
             </li>
           </ul>
         </div>
@@ -62,16 +67,18 @@ export default {
     getImg(url) {
 //      console.log(`/static/image/${url}`)
       return `/static/image/${url}`
-      //
     },
-    // 点击图片切换背景，互斥逻辑也添加在此，用id做区分。
-    // 不互斥：修改背景，传出点击事件；互斥/不可控：提示信息，不传出事件
-    toggleImage(index) {
+    // 点击事件，里面包含：
+    // 1.点击图片切换背景图片，传出本子元素的点击事件名，互斥逻辑也添加在此，用id做区分。
+    // 2.不互斥：修改背景，传出点击事件；互斥/不可控：传出互斥事件名
+    clickEvent(index,event) {
       console.log("selectId: " + this.selectId)
 //      console.log(this.pdata[index].mutexNum)
+      // 是否被互斥的标志位 被互斥true 不被互斥false
+      let isMutex = this.haveSameItem(this.selectId, this.pdata[index].mutexNum)
       if (this.pdata[index].controlable === false){
         console.log("当前按钮处于不可控状态")
-      } else if (this.haveSameItem(this.selectId, this.pdata[index].mutexNum)) {
+      } else if (isMutex) {
         console.log("当前按钮被其他按钮互斥，id是" + this.selectId)
       } else {
         this.pdata[index].select = !this.pdata[index].select;
@@ -83,8 +90,9 @@ export default {
           this.selectId.push(index)
         console.log("index: "+index)
         console.log("selectId:"+this.selectId)
-
       }
+      // 传出点击事件，带参数：1.事件名 2.是否被互斥
+      this.$emit('clicked',[this.pdata[index].name,isMutex])
     },
     /**
      * @desc 判断两个数组是否有相同元素
@@ -98,13 +106,6 @@ export default {
       }
       return false;
     },
-
-    event1() {
-      alert("按钮1事件已触发")
-    },
-    event2() {
-      alert("按钮222事件已触发")
-    }
   }
 }
 </script>

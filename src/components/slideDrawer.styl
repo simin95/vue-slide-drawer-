@@ -15,6 +15,14 @@
   width 100%
   height auto
   background greenyellow
+  .button-container
+    position relative
+    .button
+      display inline-block
+      width 28px
+      height 28px
+      background-image url("downr.png")
+      background-size 100%
   .drawer
     padding 0 5%
     .item-container
@@ -22,24 +30,30 @@
       flex-direction row
       flex-wrap wrap
       //flex-flow row || wrap
-      justify-content space-between
+      justify-content flex-start
+      margin 0
       padding 0
       .item
         list-style-type none
         flex: 0 1 auto
         width: 15%
+        //width 80px
         height 100px
-        margin 0 10px
+        margin 0 5%
         background mistyrose
-        .img
+        .inside-box
+          width 60px
           display inline-block
-          width 50px
-          height 50px
-          background-size 50px
-          border-radius 50%
-          //background-color royalblue
-          //background-image url("adv_childLock_unset.png")
-          &.active
-            background-image url("adv_childLock_set.png")
+          text-align center
+          .img
+            display inline-block
+            width 50px
+            height 50px
+            background-size 50px
+            border-radius 50%
+            //background-color royalblue
+            //background-image url("adv_childLock_unset.png")
+            &.active
+              background-image url("adv_childLock_set.png")
 
 

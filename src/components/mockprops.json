@@ -5,27 +5,28 @@
   "result": [
     {
       "id": 0,
-      "name": "童锁",
+      "name": "childlock",
+      "text": "童锁",
       "setImg": "adv_childLock_set.png",
       "unsetImg": "adv_childLock_unset.png",
       "select": true,
       "controlable": true,
-      "mutexNum": [1,3],
-      "clickFunction": "event1"
+      "mutexNum": [1,3]
     },
     {
       "id": 1,
-      "name": "烘干",
+      "name": "dry",
+      "text": "烘干",
       "setImg": "adv_dry2_set.png",
       "unsetImg": "adv_dry2_unset.png",
       "select": false,
       "controlable": true,
-      "mutexNum": [0,2,4],
-      "clickFunction": "event2"
+      "mutexNum": [0,2,4]
     },
     {
       "id": 2,
-      "name": "节能",
+      "name": "energySave",
+      "text": "节能",
       "setImg": "adv_energySave_set.png",
       "unsetImg": "adv_energySave_unset.png",
       "select": true,
@@ -34,7 +35,8 @@
     },
     {
       "id": 3,
-      "name": "夜间洗",
+      "name": "nightWash",
+      "text": "夜间洗",
       "setImg": "adv_nightWash_set.png",
       "unsetImg": "adv_nightWash_unset.png",
       "select": false,
@@ -43,7 +45,8 @@
     },
     {
       "id": 4,
-      "name": "静音",
+      "name": "quiet",
+      "text": "静音",
       "setImg": "adv_quiet_set.png",
       "unsetImg": "adv_quiet_unset.png",
       "select": true,
