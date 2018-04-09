@@ -7,9 +7,9 @@
     </ul>
     <button @click="showDrawer">弹出抽屉</button>
     <transition name="drawer-wrapper">
-      <div class="drawer-container" v-show="isShow">
-        <div class="button-container" @click="isShow=false">
-          <span class="button"></span>
+      <div class="drawer-container" v-show="propData.isShow">
+        <div class="button-container" @click="propData.isShow=false" v-if="propData.top_btn">
+          <span class="button" ></span>
         </div>
         <div class="drawer">
           <ul class="item-container">
@@ -33,16 +33,21 @@
 </template>
 
 <script>
-  const propData = require('./mockprops.json')
+
+//  测试时用这个json模拟
+//  const propData = require('./mockprops.json')
 export default {
   name: 'drawer',
-  props: [],
+  props: ['drawerOptions'],
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App',
-      isShow: true,
-      setImg: false,
-      pdata: propData.result,
+      // 传入的原始数据
+//      propData: propData.
+      propData: this.drawerOptions,
+      // 组件里所有的子项状态
+//      pdata: propData.result,
+      pdata: this.drawerOptions.result,
+      // 用来存当前被显示的项的id
       selectId: []
     }
   },
@@ -61,7 +66,7 @@ export default {
 //  },
   methods: {
     showDrawer() {
-      this.isShow = !this.isShow
+      this.propData.isShow = !this.propData.isShow
     },
     // 拿到图片url地址并转为style格式绑定到item
     getImg(url) {
@@ -69,7 +74,7 @@ export default {
       return `/static/image/${url}`
     },
     // 点击事件，里面包含：
-    // 1.点击图片切换背景图片，传出本子元素的点击事件名，互斥逻辑也添加在此，用id做区分。
+    // 1.点击图片切换背景图片，传出本子元素的点击事件名，互斥逻辑也添加在此，用id做区分，另有元素是否可控判断
     // 2.不互斥：修改背景，传出点击事件；互斥/不可控：传出互斥事件名
     clickEvent(index,event) {
       console.log("selectId: " + this.selectId)
@@ -91,8 +96,8 @@ export default {
         console.log("index: "+index)
         console.log("selectId:"+this.selectId)
       }
-      // 传出点击事件，带参数：1.事件名 2.是否被互斥
-      this.$emit('clicked',[this.pdata[index].name,isMutex])
+      // 传出点击事件，带参数：1.事件名 2.是否被互斥（true被互斥） 3.是否可控（true可控）
+      this.$emit('clicked',[this.pdata[index].name, isMutex, this.pdata[index].controlable])
     },
     /**
      * @desc 判断两个数组是否有相同元素

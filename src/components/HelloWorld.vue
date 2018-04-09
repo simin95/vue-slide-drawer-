@@ -2,6 +2,7 @@
   <div class="hello">
     <h1>{{ msg }}</h1>
     <drawer
+      :drawerOptions="this.drawerOptions"
       @clicked="drawerClicked"
     ></drawer>
   </div>
@@ -16,15 +17,73 @@ export default {
   },
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg: 'Welcome to Your Vue.js App',
+      drawerOptions: {
+        "status": 0,
+        "message": "query ok",
+        "isShow" : true,
+        "top_btn": true,
+        "result": [
+          {
+            "id": 0,
+            "name": "childlock",
+            "text": "童锁",
+            "setImg": "adv_childLock_set.png",
+            "unsetImg": "adv_childLock_unset.png",
+            "select": true,
+            "controlable": true,
+            "mutexNum": [1,3]
+          },
+          {
+            "id": 1,
+            "name": "dry",
+            "text": "烘干",
+            "setImg": "adv_dry2_set.png",
+            "unsetImg": "adv_dry2_unset.png",
+            "select": false,
+            "controlable": true,
+            "mutexNum": [0,2,4]
+          },
+          {
+            "id": 2,
+            "name": "energySave",
+            "text": "节能",
+            "setImg": "adv_energySave_set.png",
+            "unsetImg": "adv_energySave_unset.png",
+            "select": true,
+            "controlable": true,
+            "mutexNum": [1,3]
+          },
+          {
+            "id": 3,
+            "name": "nightWash",
+            "text": "夜间洗",
+            "setImg": "adv_nightWash_set.png",
+            "unsetImg": "adv_nightWash_unset.png",
+            "select": false,
+            "controlable": true,
+            "mutexNum": [0,2,4]
+          },
+          {
+            "id": 4,
+            "name": "quiet",
+            "text": "静音",
+            "setImg": "adv_quiet_set.png",
+            "unsetImg": "adv_quiet_unset.png",
+            "select": true,
+            "controlable": true,
+            "mutexNum": [1,3]
+          }
+        ]
+      }
     }
   },
   methods: {
     drawerClicked(arr) {
       console.log("drawerClicked")
-      if (arr[1] === true) {
+      if (arr[1] === true || arr[2] === false) {
         this.mutexed()
-//        console.log("该项被互斥")
+//        console.log("该项被互斥或不可控")
       } else {
         switch (arr[0]) {
           case 'childlock':
@@ -49,7 +108,7 @@ export default {
       }
     },
     mutexed() {
-      alert("该项被互斥")
+      alert("该项被互斥或处于不可控状态")
     },
     childlockClicked() {
       alert("童锁被点击")

@@ -1,7 +1,8 @@
 {
   "status": 0,
   "message": "query ok",
-  "top_btn": "false",
+  "isShow" : true,
+  "top_btn": true,
   "result": [
     {
       "id": 0,
@@ -30,7 +31,7 @@
       "setImg": "adv_energySave_set.png",
       "unsetImg": "adv_energySave_unset.png",
       "select": true,
-      "controlable": true,
+      "controlable": false,
       "mutexNum": [1,3]
     },
     {

@@ -7,14 +7,14 @@
   transition: all 0.5s ease;
   transform: translateY(0);
 
-
 .drawer-container
   position fixed
   left 0
   bottom 0
   width 100%
   height auto
-  background greenyellow
+  border-top solid 1px #000
+  //background greenyellow
   .button-container
     position relative
     .button
@@ -24,12 +24,11 @@
       background-image url("downr.png")
       background-size 100%
   .drawer
-    padding 0 5%
+    padding 0
     .item-container
       display flex
       flex-direction row
       flex-wrap wrap
-      //flex-flow row || wrap
       justify-content flex-start
       margin 0
       padding 0
@@ -40,7 +39,7 @@
         //width 80px
         height 100px
         margin 0 5%
-        background mistyrose
+        //background mistyrose
         .inside-box
           width 60px
           display inline-block
@@ -51,9 +50,5 @@
             height 50px
             background-size 50px
             border-radius 50%
-            //background-color royalblue
-            //background-image url("adv_childLock_unset.png")
-            &.active
-              background-image url("adv_childLock_set.png")
 
 
